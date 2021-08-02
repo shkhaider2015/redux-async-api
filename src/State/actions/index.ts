@@ -6,7 +6,7 @@ export const FetchPost = () => {
         const response = await Axios.get("https://jsonplaceholder.typicode.com/posts");
 
         dispatch({
-            type : ActionTypes.FETCH_POST,
+            type : ActionTypes.FETCH_POST_SUCCESS,
             payload : response.data
         })
     }

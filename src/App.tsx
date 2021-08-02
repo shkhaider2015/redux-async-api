@@ -18,10 +18,9 @@ function App() {
     }, []
   )
   return (<div>
-    Hello
     {console.log("state : ", state)}
     {
-      state.map((item:IState) => <div> 
+      state.map((item:IState, index:number) => <div key={index} > 
             <h5>{item.title} </h5> <br />
             <span> {item.body} </span>
          </div> )
