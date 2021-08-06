@@ -6,18 +6,23 @@ export enum ActionTypes {
     FETCH_POST_FAILURE = "fetch_post_failure"
 } 
 
-export interface IState {
+export interface IItem {
     userId : number,
     id : number,
     title : string,
     body : string
+}
+export interface IState {
+    loading : boolean
+    error : string | null
+    items : IItem[]
 }
 
 export type StateType = ReturnType<typeof Reducers>
 
 export interface IPostSuccessAction {
     type : ActionTypes.FETCH_POST_SUCCESS
-    payload : IState[]
+    payload : IItem[]
 }
 export interface IPostRequestAction {
     type : ActionTypes.FETCH_POST_REQUEST

@@ -4,12 +4,12 @@ import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreator from "./State/actions";
-import { IState, StateType } from './State/types';
+import { IItem, IState, StateType } from './State/types';
 
 function App() {
 
   const dispatch = useDispatch();
-  const state = useSelector((state:StateType) => state.post)
+  const { error, items, loading }:IState = useSelector((state:StateType) => state.post)
   const { FetchPost } = bindActionCreators(actionCreator, dispatch)
 
   React.useEffect(
@@ -17,10 +17,22 @@ function App() {
       FetchPost()
     }, []
   )
+    {console.log(`Loading : ${loading} and \nerror : ${error}`)}
+  if(loading)
+  {
+    return <div style={{ height : '100vh', display : 'grid', placeItems : 'center'}} >
+      <h1>... Loading</h1>
+    </div>
+  }
+  if(error)
+  {
+    return <div style={{ display : 'grid', placeItems : 'center'}} >
+        Error Message <br />
+    </div>
+  }
   return (<div>
-    {console.log("state : ", state)}
     {
-      state.map((item:IState, index:number) => <div key={index} > 
+      items.map((item:IItem, index:number) => <div key={index} > 
             <h5>{item.title} </h5> <br />
             <span> {item.body} </span>
          </div> )
